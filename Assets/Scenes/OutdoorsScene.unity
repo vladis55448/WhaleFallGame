@@ -9142,7 +9142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2070098788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9155,6 +9155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dbcbe43a6c8ed048977ef41f5f5589a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fps: 60
 --- !u!4 &2070098789
 Transform:
   m_ObjectHideFlags: 0
@@ -18250,8 +18251,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1823688467}
-  - {fileID: 2070098789}
   - {fileID: 432432461}
+  - {fileID: 2070098789}
   - {fileID: 2013410475}
   - {fileID: 29651207}
   - {fileID: 1029734052}

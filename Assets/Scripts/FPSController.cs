@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class FPSController : MonoBehaviour
 {
+    [SerializeField]
+    private int _fps;
+
     private void Start()
     {
-        Application.targetFrameRate = 35;
+        Application.targetFrameRate = _fps;
     }
 }
