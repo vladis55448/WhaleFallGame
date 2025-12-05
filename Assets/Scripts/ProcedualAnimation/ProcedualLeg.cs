@@ -1,4 +1,5 @@
-using Unity.VisualScripting;
+using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class ProcedualLeg : MonoBehaviour
@@ -12,7 +13,7 @@ public class ProcedualLeg : MonoBehaviour
     [SerializeField]
     private float _repositionDistance;
     [SerializeField]
-    private float _speed;
+    private float _stepDuration;
     [SerializeField]
     private float _stepHeight;
     [SerializeField]
@@ -22,13 +23,14 @@ public class ProcedualLeg : MonoBehaviour
 
     private Vector3 _previousPosition;
     private Vector3 _nextPosition;
-    private float _lerp = 1;
 
     [HideInInspector]
     public bool CanMove = true;
     public Transform BodyTarget => _bodyTarget;
     public Transform RaycastTarget => _raycastRoot;
-    public bool IsMoving => _lerp < 1;
+
+    public event Action<ProcedualLeg> StartedMove;
+    public event Action<ProcedualLeg> CompletedMove;
 
     // Update is called once per frame
     private void Update()
@@ -39,27 +41,32 @@ public class ProcedualLeg : MonoBehaviour
             Debug.DrawLine(_raycastRoot.position, hit.point);
             if (Vector3.Distance(hit.point, _target.position) > _repositionDistance)
             {
-                if (_lerp >= 1 && CanMove)
+                if (CanMove)
                 {
                     _raycastRoot.forward = Vector3.ProjectOnPlane(_raycastRoot.parent.forward, hit.normal).normalized;
                     _previousPosition = _target.position;
                     _nextPosition = hit.point;
-                    _lerp = 0;
+                    Move();
                 }
             }
         }
-        if (_lerp < 1)
+    }
+
+    private void Move()
+    {
+        CanMove = false;
+        StartedMove?.Invoke(this);
+        DOVirtual.Float(0, 1, _stepDuration, (value) =>
         {
-            var position = Vector3.Lerp(_previousPosition, _nextPosition, _lerp);
-            position.y += Mathf.Sin(_lerp * Mathf.PI) * _stepHeight;
+            var position = Vector3.Lerp(_previousPosition, _nextPosition, value);
+            position.y += Mathf.Sin(value * Mathf.PI) * _stepHeight;
             _target.position = position;
-            _lerp += Time.deltaTime * _speed;
-            if (_lerp >= 1)
-            {
-                _stepParticles.transform.position = _nextPosition;
-                _stepParticles.Play();
-            }
-        }
+        }).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            CompletedMove?.Invoke(this);
+            _stepParticles.transform.position = _nextPosition;
+            _stepParticles.Play();
+        });
     }
 
     private void OnDrawGizmos()

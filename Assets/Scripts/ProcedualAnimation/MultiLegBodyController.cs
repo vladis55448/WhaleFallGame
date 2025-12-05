@@ -17,36 +17,19 @@ public class MultiLegBodyController : MonoBehaviour
 
     private Vector3 _directionalOffset => transform.forward * _centerOffset.z + transform.forward * _centerOffset.x + transform.up * _centerOffset.y;
 
+    private void Start()
+    {
+        foreach (var group in _groups)
+        {
+            group.Init();
+        }
+    }
+
     private void Update()
     {
         transform.position = Vector3.Lerp(transform.position, _directionalOffset + LegsCenter(), Time.deltaTime * _followSpeed);
         var targetForward = Vector3.RotateTowards(transform.forward, LegsForward(), _rotationSpeed * Time.deltaTime, 0);
         transform.forward = targetForward;
-
-        if (_groups.Count > 0)
-        {
-            foreach (var group in _groups)
-            {
-                bool lockLegs = false;
-                foreach (var leg in group.PairedLegs)
-                {
-                    if (leg.IsMoving)
-                    {
-                        lockLegs = true;
-                        break;
-                    }
-                }
-                ChangeLegsLockState(group, lockLegs);
-            }
-        }
-    }
-
-    private void ChangeLegsLockState(LegGroup group, bool lockLegs)
-    {
-        foreach (var leg in group.PairedLegs)
-        {
-            leg.CanMove = !lockLegs;
-        }
     }
 
     private Vector3 LegsCenter()
@@ -87,5 +70,32 @@ public class MultiLegBodyController : MonoBehaviour
     private class LegGroup
     {
         public List<ProcedualLeg> PairedLegs;
+
+        public void Init()
+        {
+            foreach (var leg in PairedLegs)
+            {
+                leg.StartedMove += OnLegStartedMove;
+                leg.CompletedMove += OnLegCompletedMove;
+            }
+        }
+
+        private void OnLegStartedMove(ProcedualLeg movedLeg)
+        {
+            foreach (var leg in PairedLegs)
+            {
+                if (leg != movedLeg)
+                    leg.CanMove = false;
+            }
+        }
+
+        private void OnLegCompletedMove(ProcedualLeg movedLeg)
+        {
+            foreach (var leg in PairedLegs)
+            {
+                if (leg != movedLeg)
+                    leg.CanMove = true;
+            }
+        }
     }
 }
