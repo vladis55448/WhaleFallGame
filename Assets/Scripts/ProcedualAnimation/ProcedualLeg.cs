@@ -36,7 +36,7 @@ public class ProcedualLeg : MonoBehaviour
     private void Update()
     {
         var hit = new RaycastHit();
-        if (Physics.Raycast(_raycastRoot.position, -_raycastRoot.up, out hit, 100, _mask))
+        if (Physics.Raycast(_raycastRoot.position, -_raycastRoot.up, out hit, 1000, _mask))
         {
             Debug.DrawLine(_raycastRoot.position, hit.point);
             if (Vector3.Distance(hit.point, _target.position) > _repositionDistance)

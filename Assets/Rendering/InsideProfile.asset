@@ -96,22 +96,22 @@ MonoBehaviour:
   active: 1
   _distance:
     m_OverrideState: 1
-    m_Value: 29.12
+    m_Value: 63.9
   _color:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 0}
   _ditherSpread:
     m_OverrideState: 1
-    m_Value: 4.5
+    m_Value: 0.13
   _colorResolution:
     m_OverrideState: 1
     m_Value: 8
   _colorFalloff:
     m_OverrideState: 1
-    m_Value: 0.617
+    m_Value: 0.046
   _fogPower:
     m_OverrideState: 1
-    m_Value: 0.03
+    m_Value: 11.9
 --- !u!114 &-4170273333233864572
 MonoBehaviour:
   m_ObjectHideFlags: 3

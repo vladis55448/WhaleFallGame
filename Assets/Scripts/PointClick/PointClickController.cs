@@ -11,9 +11,23 @@ public class PointClickController : MonoBehaviour
     [SerializeField]
     private LayerMask _mask;
 
+    public bool Locked;
+
+    public void Lock()
+    {
+        Locked = true;
+    }
+
+    public void Unlock()
+    {
+        Locked = false;
+    }
+
     // Update is called once per frame
     private void Update()
     {
+        if (Locked)
+            return;
         RaycastHit hit;
         var screenMousePos = Input.mousePosition;
         var mouseRectPosX = Mathf.InverseLerp(_bottomPoint.position.x, _topPoint.position.x, screenMousePos.x);
