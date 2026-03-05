@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class FirstPersonController : MonoBehaviour
@@ -14,7 +15,17 @@ public class FirstPersonController : MonoBehaviour
     private float _lookXLimit = 45f;
     [SerializeField]
     private GameObject _interactHint;
+    [SerializeField]
+    private CinemachineImpulseSource _impulseSource;
+    [SerializeField]
+    private float _stepDelay;
+    [SerializeField]
+    private float _stepFrequency;
+    [SerializeField]
+    private float _stepHeight;
 
+
+    private float _stepTime = 0;
     private Vector3 _moveDirection = Vector3.zero;
     private float _rotationX = 0;
     private CharacterController _characterController;
@@ -35,32 +46,40 @@ public class FirstPersonController : MonoBehaviour
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
         if (_isFixed)
             return;
-        // Handle Movement
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         float currentSpeedX = _walkSpeed * Input.GetAxis("Vertical");
         float currentSpeedY = _walkSpeed * Input.GetAxis("Horizontal");
-        float movementDirectionY = _moveDirection.y;
-        _moveDirection = (forward * currentSpeedX) + (right * currentSpeedY);
 
-        // Move the Character
+        _moveDirection = (forward * currentSpeedX) + (right * currentSpeedY);
+        if (_moveDirection.magnitude > 0)
+        {
+            _stepTime += Time.deltaTime * _stepFrequency;
+            if (_stepTime - _stepDelay > 0.9)
+            {
+                _impulseSource.GenerateImpulse(Vector3.up * _stepHeight);
+                _stepTime = 0;
+            }
+        }
+        else
+        {
+            _stepTime = _stepDelay;
+        }
+        _moveDirection += Vector3.down * 9.8f;
+
         _characterController.Move(_moveDirection * Time.deltaTime);
 
-        // Handle Rotation and Camera Movement (Look Around)
         _rotationX += -Input.GetAxis("Mouse Y") * _sensitivityY;
         _rotationX = Mathf.Clamp(_rotationX, -_lookXLimit, _lookXLimit);
         _cameraRoot.transform.localRotation = Quaternion.Euler(_rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * _sensitivityX, 0);
         CheckInteraction();
-
-
     }
 
     private void CheckInteraction()

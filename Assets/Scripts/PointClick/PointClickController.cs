@@ -10,8 +10,19 @@ public class PointClickController : MonoBehaviour
     private Transform _topPoint;
     [SerializeField]
     private LayerMask _mask;
+    [SerializeField]
+    private Vector2 _cursorHotspot;
+    [SerializeField]
+    private Texture2D _cursorTexture;
+    [SerializeField]
+    private Texture2D _interactionCursor;
 
     public bool Locked;
+
+    private void Start()
+    {
+        Cursor.SetCursor(_cursorTexture, _cursorHotspot, CursorMode.Auto);
+    }
 
     public void Lock()
     {
@@ -23,7 +34,6 @@ public class PointClickController : MonoBehaviour
         Locked = false;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (Locked)
@@ -37,10 +47,22 @@ public class PointClickController : MonoBehaviour
         if (Physics.Raycast(mouseViewRay, out hit, 100, _mask))
         {
             var clickComponent = hit.collider.GetComponent<IClickComponent>();
-            if (Input.GetMouseButtonDown(0) && clickComponent != null)
+            if (clickComponent != null)
             {
-                clickComponent.Click();
+                Cursor.SetCursor(_interactionCursor, _cursorHotspot, CursorMode.Auto);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    clickComponent.Click();
+                }
             }
+            else
+            {
+                Cursor.SetCursor(_cursorTexture, _cursorHotspot, CursorMode.Auto);
+            }
+        }
+        else
+        {
+            Cursor.SetCursor(_cursorTexture, _cursorHotspot, CursorMode.Auto);
         }
     }
 }

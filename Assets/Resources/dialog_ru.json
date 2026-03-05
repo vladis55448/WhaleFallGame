@@ -3,454 +3,259 @@
         "Id": "Capsule",
         "Messages": [
             {
-                "Text": "Капсула на которой меня спускали",
+                "Text": "Пилюля.",
                 "EventId": "none",
                 "Character": "Mind"
             },
             {
-                "Text": "Единственный способ доставки чебуслопа на глубину",
-                "EventId": "none",
-                "Character": "Mind"
-            },
-            {
-                "Text": "Сегодня чебуслопом стал я",
+                "Text": "Выглядит страшно, но выполняет свою работу.",
                 "EventId": "none",
                 "Character": "Mind"
             }
         ]
     },
     {
-        "Id": "StartDoor",
+        "Id": "Deccent_Block",
         "Messages": [
             {
-                "Text": "Странно, что никто не пришёл",
-                "EventId": "none",
-                "Character": "Mind"
-            },
-            {
-                "Text": "И кого я здесь должен лечить...",
+                "Text": "Лучше сначала поговорить с крановщиком",
                 "EventId": "none",
                 "Character": "Mind"
             }
         ]
     },
     {
-        "Id": "Corridor1",
+        "Id": "Deccent_0",
         "Messages": [
             {
-                "Text": "Жесть, как же темно",
+                "Text": "Доброе утро, Александр",
                 "EventId": "none",
-                "Character": "Mind"
+                "Character": "TopManager"
             },
             {
-                "Text": "Хотя чего я ожидал от термогенераторов",
+                "Text": "Здравствуйте",
                 "EventId": "none",
-                "Character": "Mind"
+                "Character": "Hero"
+            },
+            {
+                "Text": "Вы проверили фиксаторы?",
+                "EventId": "none",
+                "Character": "TopManager"
+            },
+            {
+                "Text": "Да",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Ремни затянуты?",
+                "EventId": "none",
+                "Character": "TopManager"
+            },
+            {
+                "Text": "Да, всё впорядке",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Сиденье комфортно?",
+                "EventId": "none",
+                "Character": "TopManager"
+            },
+            {
+                "Text": "Давайте уже приступать",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Да, конечно.",
+                "EventId": "none",
+                "Character": "TopManager"
+            },
+            {
+                "Text": "По процедуре вы должны дать добровольное согласие.",
+                "EventId": "none",
+                "Character": "TopManager"
+            },
+            {
+                "Text": "Пожалуйста представьтесь, а затем скажите, что вы согласны на транспортировку к рабочему месту.",
+                "EventId": "none",
+                "Character": "TopManager"
+            },
+            {
+                "Text": "Вы уже привязали меня - зачем…",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Не я писал правила",
+                "EventId": "none",
+                "Character": "TopManager"
+            },
+            {
+                "Text": "Хорошо.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Я - Вершинин Александр Сергеевич.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Даю своё персональное согласие на транспортировку к рабочему месту.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Формальности закончены? Можно уже меня опустить?",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Конечно, удачной вахты, Александр.",
+                "EventId": "none",
+                "Character": "TopManager"
             }
         ]
     },
     {
-        "Id": "Corridor2",
+        "Id": "Deccent_1",
         "Messages": [
             {
-                "Text": "...",
+                "Text": "Привет, коллега, нормально добрался?",
                 "EventId": "none",
-                "Character": "Mind"
+                "Character": "Crane"
             },
             {
-                "Text": "...",
-                "EventId": "TurnCorner",
-                "Character": "Mind"
-            },
-            {
-                "Text": "А!",
-                "EventId": "ShowCook",
-                "Character": "Hero"
-            },
-            {
-                "Text": "Боже, Леша!",
-                "EventId": "MoveCook",
-                "Character": "Cook"
-            },
-            {
-                "Text": "Че ты так тихо ходишь!?",
-                "EventId": "none",
-                "Character": "Cook"
-            },
-            {
-                "Text": "Погоди...",
-                "EventId": "none",
-                "Character": "Cook"
-            },
-            {
-                "Text": "Здрасте, я Саша - ваш новый врач",
+                "Text": "Здравствуйте, всё в порядке.",
                 "EventId": "none",
                 "Character": "Hero"
             },
             {
-                "Text": "Прости, Саша, я путаю лабораторных крыс в темноте",
+                "Text": "Да ладно тебе, всем страшно в первый раз.",
                 "EventId": "none",
-                "Character": "Cook"
+                "Character": "Crane"
             },
             {
-                "Text": "Всё нормально",
+                "Text": "Ты ж на пюлюле мог в пасть кита спускаться.",
                 "EventId": "none",
-                "Character": "Hero"
+                "Character": "Crane"
             },
             {
-                "Text": "А ты чего тут один?",
-                "EventId": "none",
-                "Character": "Cook"
-            },
-            {
-                "Text": "Неужели никто не встретил твою капсулу?",
-                "EventId": "none",
-                "Character": "Cook"
-            },
-            {
-                "Text": "Ты первая, кого я увидел",
+                "Text": "Мне сказали, что они так близко не подплывают.",
                 "EventId": "none",
                 "Character": "Hero"
             },
             {
-                "Text": "Видимо капитан занят, я тебя к нему провожу",
+                "Text": "Ха, да начальство куча чего болтает.",
                 "EventId": "none",
-                "Character": "Cook"
+                "Character": "Crane"
             },
             {
-                "Text": "А потом пойду разгребать груз...",
+                "Text": "Ладно, всё ты крепыш.",
                 "EventId": "none",
-                "Character": "Cook"
+                "Character": "Crane"
             },
             {
-                "Text": "Груз?",
+                "Text": "Спасибо",
                 "EventId": "none",
                 "Character": "Hero"
             },
             {
-                "Text": "Ну да, нам по рассписанию должны были присать продовольствие",
+                "Text": "Димку до тебя жутко разнесло на его первом спуске.",
                 "EventId": "none",
-                "Character": "Cook"
+                "Character": "Crane"
             },
             {
-                "Text": "Но похоже в капсуле затесалась крыска...",
+                "Text": "А можно меня уже отстегнуть?",
                 "EventId": "none",
-                "Character": "Cook"
+                "Character": "Hero"
             },
             {
-                "Text": "Ладно, не моё дело что думают кадровики",
+                "Text": "Ты меня сам заболтал.",
                 "EventId": "none",
-                "Character": "Cook"
+                "Character": "Crane"
             },
             {
-                "Text": "Пойдём к капитану",
-                "EventId": "MoveCook1",
-                "Character": "Cook"
+                "Text": "Щас",
+                "EventId": "none",
+                "Character": "Crane"
             }
         ]
     },
     {
-        "Id": "Corridor2_1",
+        "Id": "Deccent_3",
         "Messages": [
             {
-                "Text": "Дедовщина в первый день...",
+                "Text": "Точно, я забыл представиться.",
                 "EventId": "none",
-                "Character": "Mind"
-            }
-        ]
-    },
-    {
-        "Id": "Corridor3",
-        "Messages": [
-            {
-                "Text": "Даниил, я понимаю, что ты считаешь свою работу здесь полезной",
-                "EventId": "none",
-                "Character": "Cap"
+                "Character": "Crane"
             },
             {
-                "Text": "Но она действительно полезна...",
+                "Text": "Я Петр Семеныч - отвечаю за лифт сообщения и склады.",
                 "EventId": "none",
-                "Character": "Laborant"
+                "Character": "Crane"
             },
             {
-                "Text": "Я так и сказал, не перебивай старших",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Так вот, всвязи с кадровым дефецитом - у тебя повышение",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Вылазь из своей вонючей лаборатории и иди помоги Марине Андреевне с уборкой помещений",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Почему я должен выполнять грязную работу?",
-                "EventId": "none",
-                "Character": "Laborant"
-            },
-            {
-                "Text": "Меня не за этим посылали на...",
-                "EventId": "none",
-                "Character": "Laborant"
-            },
-            {
-                "Text": "Я не знаю кто и куда тебя послал, но сейчас я твой начальник",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Но сейчас главная цель - безопасная жизнь для команды",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Или твои пробирки важнее, чем дизентегрия на судне?",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Дисанитария",
+                "Text": "Приятно, я Александр - буду лечащим врачом на станции.",
                 "EventId": "none",
                 "Character": "Hero"
             },
             {
-                "Text": "А вот и новый умник!",
-                "EventId": "TurnCap",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Врач - Александр",
+                "Text": "Так что при любых телесных,или ментальных проблемах...",
                 "EventId": "none",
                 "Character": "Hero"
             },
             {
-                "Text": "Ну привет, Санька",
-                "EventId": "MoveCapCloser",
-                "Character": "Cap"
-            },
-            {
-                "Text": "В прошлом цикле меня предупреждали, что будет новенький",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Я Максим Саныч, это наш биолог - Даня",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Привет...",
-                "EventId": "none",
-                "Character": "Laborant"
-            },
-            {
-                "Text": "Приятно познакомиться",
+                "Text": "Обращайтесь.",
                 "EventId": "none",
                 "Character": "Hero"
             },
             {
-                "Text": "Расслабься, ты застрял здесь на перу лет, так что быстро разучишься стеснительности",
+                "Text": "Не обижайся, Сань, но у нас нормальные люди - депрессию лечат работой.",
                 "EventId": "none",
-                "Character": "Cap"
+                "Character": "Crane"
             },
             {
-                "Text": "Тут у тебя будет постоянный тесный контакт с мужиками",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "А еще с Даней!",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "АХА-ХА-ХА",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Не смешно?",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Ну ладно, потом ещё расскажу тебе парочку анекдотов",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Не пугайте Саньку в первый день",
-                "EventId": "MoveCook",
-                "Character": "Cook"
-            },
-            {
-                "Text": "О, Маринка, а ты чего тут, а не у капсулы?",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Так я встретила нашего врача бродящим по каридорам",
-                "EventId": "none",
-                "Character": "Cook"
-            },
-            {
-                "Text": "Решила к вам его привести",
-                "EventId": "none",
-                "Character": "Cook"
-            },
-            {
-                "Text": "Тебя никто не встретил?",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Никого не было, когда я вышел",
+                "Text": "В любом случае - моя работа следить за состоянием команды.",
                 "EventId": "none",
                 "Character": "Hero"
             },
             {
-                "Text": "Странно, капсула не может сама стыковаться...",
+                "Text": "Жесть, ты сухой как чебуслоп.",
                 "EventId": "none",
-                "Character": "Cap"
+                "Character": "Crane"
             },
             {
-                "Text": "Там должен был быть Михал Палыч, он же всех и встречает",
+                "Text": "Ну ладно, Александр - у меня ещё есть чем заняться.",
                 "EventId": "none",
-                "Character": "Cap"
+                "Character": "Crane"
             },
             {
-                "Text": "Михал Палыч?",
+                "Text": "А тебе лучше навестить шефа.",
+                "EventId": "none",
+                "Character": "Crane"
+            },
+            {
+                "Text": "А где его найти?",
                 "EventId": "none",
                 "Character": "Hero"
             },
             {
-                "Text": "Да, наш инженер-мехатроник, обычно он в рабочем модуле, но всегда приходит во время стыковок",
+                "Text": "Этажом выше - рядом с лабораторией. Быстро разберешься.",
                 "EventId": "none",
-                "Character": "Cap"
+                "Character": "Crane"
             },
             {
-                "Text": "Я видел, как он проходил в сторону шлюза, когда мы общались",
-                "EventId": "none",
-                "Character": "Laborant"
-            },
-            {
-                "Text": "Да ну? И даже не поздаровался? Он же мужик ровный",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Ну ладно, вы сейчас всё равно познакомитесь",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Твой пост будет в рабочем модуле - там живут наши собиратели",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Знаешь, как ходаком пользоваться?",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Ну да",
+                "Text": "Спасибо. Я пойду.",
                 "EventId": "none",
                 "Character": "Hero"
             },
             {
-                "Text": "Так метнись к ним кобанчиком, все формальности закончим потом",
+                "Text": "Удачи, Александр.",
                 "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Я могу вот так просто взять меха?",
-                "EventId": "none",
-                "Character": "Hero"
-            },
-            {
-                "Text": "Есть проблемы? Раз я сказал, чтобы ты пошел - то иди",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "А я могу уже идти?",
-                "EventId": "none",
-                "Character": "Cook"
-            },
-            {
-                "Text": "Да все уже идите работать, даже ты Даня",
-                "EventId": "none",
-                "Character": "Cap"
-            },
-            {
-                "Text": "Добро пожаловать на дно, Саня!",
-                "EventId": "none",
-                "Character": "Cap"
-            }
-        ]
-    },
-    {
-        "Id": "Corridor3_Laborant",
-        "Messages": [
-            {
-                "Text": "Приятно познакомиться",
-                "EventId": "none",
-                "Character": "Laborant"
-            },
-            {
-                "Text": "Взаимно",
-                "EventId": "none",
-                "Character": "Hero"
-            },
-            {
-                "Text": "Держись, Даня",
-                "EventId": "none",
-                "Character": "Mind"
-            }
-        ]
-    },
-    {
-        "Id": "MechRoom_1",
-        "Messages": [
-            {
-                "Text": "Гроб на ножках",
-                "EventId": "none",
-                "Character": "Mind"
-            },
-            {
-                "Text": "Стальной катафалк",
-                "EventId": "none",
-                "Character": "Mind"
-            },
-            {
-                "Text": "Ебучая ржавая посудина",
-                "EventId": "none",
-                "Character": "Hero"
-            },
-            {
-                "Text": "На тренинге были модели получше, а этот уже доисторический",
-                "EventId": "none",
-                "Character": "Hero"
-            },
-            {
-                "Text": "И на тренинге был бассейн, а не утроба водной планеты",
-                "EventId": "none",
-                "Character": "Hero"
-            },
-            {
-                "Text": "...",
-                "EventId": "none",
-                "Character": "Hero"
-            },
-            {
-                "Text": "Ну что народ, погнали нахуй",
-                "EventId": "none",
-                "Character": "Hero"
+                "Character": "Crane"
             }
         ]
     }

@@ -9,7 +9,6 @@ public class DialogInstance : MonoBehaviour, IClickComponent
     private string _dialogId;
     [SerializeField]
     private UnityEvent _onStart = null;
-
     [SerializeField]
     private UnityEvent _onComplete = null;
     [SerializeField]

@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class DialogController : MonoBehaviour
 {
     [SerializeField]
+    private FirstPersonController _firstPersonController;
+    [SerializeField]
     private PointClickController _pointClickController;
     [SerializeField]
     private TMP_Text _textField;
@@ -33,12 +35,25 @@ public class DialogController : MonoBehaviour
     private Sequence _typingTween;
     private Sequence _waitingTween;
 
-    public static DialogController Instance;
+    private bool _initializedLines = false;
+
+    private CursorLockMode _prevCursorState;
+
+    private static DialogController _instance;
+    public static DialogController Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindAnyObjectByType<DialogController>();
+            }
+            return _instance;
+        }
+    }
 
     private void Start()
     {
-        Instance = this;
-        _lines = JsonConvert.DeserializeObject<List<DialogLine>>(_config.text);
     }
 
     private void LateUpdate()
@@ -70,12 +85,12 @@ public class DialogController : MonoBehaviour
         _waitingTween = DOTween.Sequence();
         _waitingTween.AppendCallback(() =>
         {
-            _textField.text += '\\';
+            _textField.text += " \\";
         });
         _waitingTween.AppendInterval(0.5f);
         _waitingTween.AppendCallback(() =>
         {
-            _textField.text = _textField.text.Remove(_textField.text.Length - 1);
+            _textField.text = _textField.text.Remove(_textField.text.Length - 2);
         });
         _waitingTween.AppendInterval(0.5f);
         _waitingTween.SetLoops(-1);
@@ -90,6 +105,7 @@ public class DialogController : MonoBehaviour
             return;
         if (_messageCounter == _messages.Count)
         {
+            Cursor.lockState = _prevCursorState;
             _active = false;
             _pointClickController.Locked = false;
             _textField.text = "";
@@ -134,17 +150,25 @@ public class DialogController : MonoBehaviour
     {
         if (_active)
             return;
+        _prevCursorState = Cursor.lockState;
+        Cursor.lockState = CursorLockMode.None;
+        if (!_initializedLines)
+        {
+            _lines = JsonConvert.DeserializeObject<List<DialogLine>>(_config.text);
+            _initializedLines = true;
+        }
         _dialogTextBox.SetActive(true);
         foreach (var line in _lines)
         {
             if (line.Id == dialog.Id)
             {
-                _messageCounter = -2;
+                _messageCounter = -1;
                 _messages = line.Messages;
                 _currentDialog = dialog;
                 _pointClickController.Locked = true;
                 _active = true;
                 AdvanceDialog();
+                break;
             }
         }
 
