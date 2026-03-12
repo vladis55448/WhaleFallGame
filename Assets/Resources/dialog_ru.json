@@ -15,6 +15,16 @@
         ]
     },
     {
+        "Id": "Not now",
+        "Messages": [
+            {
+                "Text": "Не сейчас",
+                "EventId": "none",
+                "Character": "Mind"
+            }
+        ]
+    },
+    {
         "Id": "Deccent_Block",
         "Messages": [
             {
@@ -256,6 +266,261 @@
                 "Text": "Удачи, Александр.",
                 "EventId": "none",
                 "Character": "Crane"
+            }
+        ]
+    },
+    {
+        "Id": "CapGreet",
+        "Messages": [
+            {
+                "Text": "Можно войти?",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Да-да, можно.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Хорошо.",
+                "EventId": "OpenDoor",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Здравствуйте.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "О, твоя капсула уже прибыла.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Прости, засиделся за бумажками и не успел тебя встретить лично.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Ничего, Петр Семенович подсказал как до вас дойти.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Ну хорошо, тогда заходи, не блокируй другим проход.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Да, конечно",
+                "EventId": "MoveCloser",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Давай сначала нормально тебя оформим, потом тебе поясню некоторые правила.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Прeдставься пожалуйста.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Меня зовут Вершинин Александр Сергеевич.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "И меня отправили на эту станцию вахтовым врачом на срок в один год.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Так ты ещё студент?",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Уже нет.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Но ещё не врач?",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Ещё нет...",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Теперь специальная практика обязательна для всех.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Вон онон как.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Тебе хоть платят за это?",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Мне сказали, что здесь за работу бесплатно кормят.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Понятно. Свой бесплатный слоп ты точно получишь.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "За работу конечно.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Ну чтож, давай теперь я представлюсь - Дубох Михаил Иванович.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Приятно познакомиться.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Конечно-конечно.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Так вот, Александр - вкратце расскажу тебе об работе на станции.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Дело у нас трудное, а ещё крайне опасное.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "И для тела, и для души.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Так что попрошу тебя осматривать и разговаривать с коллегами после каждой их смены.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "В первую очередь следи за нашими дайверамию.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Им особо тяжело - вид гниющей мегафауны плохо сказывается на рассудке.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Так что отнесись к ним с пониманием.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Я постараюсь.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Хорошо. Ещё отдельно объясню тебе режим работы станции.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Хоть здесь и не видно солнца, мы всё равно делим день на циклы.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Днем работа, ночью сон. Без обсуждений.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Нарушение режима тут же будет отражено в личном деле.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Подробности будут в уставе, очень советую почитать.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Ну и на последок от меня.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Всегда закрывай двери, чтобы не блокировать каридоры.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "И экономь свет. Как видишь - у нас даже на свет строгий лимит.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Каждый килловатт на счету.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Хорошо, запомню.",
+                "EventId": "none",
+                "Character": "Hero"
+            },
+            {
+                "Text": "Все так говорят, но понимают после первой затресчены.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "А некоторые после десятой...",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Ладно, не буду тебя дальше держать - вот тебе ключ от твоей комнаты.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Иди на этаж выше, отохни.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Потом жду тебя в мед кабинете через стену.",
+                "EventId": "none",
+                "Character": "Cap"
+            },
+            {
+                "Text": "Ладно, постараюсь не задерживаться.",
+                "EventId": "none",
+                "Character": "Hero"
             }
         ]
     }

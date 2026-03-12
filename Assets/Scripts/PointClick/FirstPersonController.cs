@@ -85,17 +85,21 @@ public class FirstPersonController : MonoBehaviour
     private void CheckInteraction()
     {
         RaycastHit hit;
-        if (Physics.Raycast(_cameraRoot.position, _cameraRoot.forward, out hit, 4f))
+        if (Physics.Raycast(_cameraRoot.position, _cameraRoot.forward, out hit, 2f))
         {
             var interactive = hit.transform.GetComponent<FirstPersonInteractive>();
             if (interactive != null)
             {
                 _interactHint.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetMouseButtonDown(0))
                 {
                     _interactHint.SetActive(false);
                     interactive.Activate();
                 }
+            }
+            else
+            {
+                _interactHint.SetActive(false);
             }
         }
         else

@@ -151,7 +151,7 @@ public class DialogController : MonoBehaviour
         if (_active)
             return;
         _prevCursorState = Cursor.lockState;
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
         if (!_initializedLines)
         {
             _lines = JsonConvert.DeserializeObject<List<DialogLine>>(_config.text);
