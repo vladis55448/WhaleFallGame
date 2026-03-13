@@ -24,13 +24,17 @@ public class DialogController : MonoBehaviour
     private float _typingDelay;
     [SerializeField]
     private List<DialogCharacter> _colors = new List<DialogCharacter>();
+    [SerializeField]
+    private List<DialogOptionUI> _options = new List<DialogOptionUI>();
+    [SerializeField]
+    private float _typingDelayForOptions;
 
     private bool _active;
     private bool _typingSentence;
+    private bool _waitingForAnswer;
     private DialogGraph _currentGraph;
     private INode _currentNode;
     private DialogInstance _currentDialogInstance;
-    private string _completeMessage;
     private Sequence _typingTween;
     private Sequence _waitingTween;
 
@@ -58,21 +62,11 @@ public class DialogController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_active)
+        if (_active && !_waitingForAnswer)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (_typingSentence)
-                {
-                    // if (_typingTween != null)
-                    // {
-                    //     _typingTween.Kill();
-                    // }
-                    // _textField.text = _completeMessage;
-                    // _typingSentence = false;
-                    // SetWaitingAnimation();
-                }
-                else
+                if (!_typingSentence)
                 {
                     AdvanceDialog();
                 }
@@ -96,11 +90,11 @@ public class DialogController : MonoBehaviour
         _waitingTween.SetLoops(-1);
     }
 
-    private void AdvanceDialog(int portId = -1)
+    private void AdvanceDialog(int portId = 0)
     {
         if (_waitingTween != null)
             _waitingTween.Kill();
-        _currentNode = _currentNode.GetOutputPort(0).firstConnectedPort.GetNode();
+        _currentNode = _currentNode.GetOutputPort(portId).firstConnectedPort.GetNode();
         switch (_currentNode)
         {
             case EndNode:
@@ -116,40 +110,20 @@ public class DialogController : MonoBehaviour
                 }
             case DialogNode:
                 {
-                    var node = _currentNode as DialogNode;
-                    _textField.text = "";
-                    string _completeMessage = "";
-                    node.GetNodeOptionByName("Text").TryGetValue<string>(out _completeMessage);
-
-                    var characterPort = node.GetInputPortByName("Character");
-                    var json = JsonUtility.ToJson(characterPort.firstConnectedPort.GetNode());
-                    var data = JObject.Parse(json);
-
-                    string characterId = data["m_Title"].ToString();
-                    foreach (var c in _colors)
-                    {
-                        if (c.CharacterId.Equals(characterId))
-                        {
-                            _dialogSprite.sprite = c.Sprite;
-                            _textField.color = c.Color;
-                        }
-                    }
-
-                    _typingSentence = true;
-                    _typingTween = DOTween.Sequence();
-
-                    foreach (var ch in _completeMessage)
-                    {
-                        _typingTween.AppendInterval(_typingDelay);
-                        _typingTween.AppendCallback(() =>
-                        {
-                            _textField.text += ch;
-                        });
-                    }
+                    SetMainTextFromNode();
+                    break;
+                }
+            case OptionsNode:
+                {
+                    _waitingForAnswer = true;
+                    SetMainTextFromNode();
                     _typingTween.AppendCallback(() =>
                     {
-                        _typingSentence = false;
-                        SetWaitingAnimation();
+                        Cursor.lockState = CursorLockMode.None;
+                        foreach (var option in _options)
+                        {
+                            SetOptionDialogFromNode(option);
+                        }
                     });
                     break;
                 }
@@ -163,6 +137,89 @@ public class DialogController : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    private void SetMainTextFromNode()
+    {
+        var node = _currentNode as Node;
+        string _completeMessage = "";
+        node.GetNodeOptionByName("Text").TryGetValue<string>(out _completeMessage);
+
+        var characterPort = node.GetInputPortByName("Character");
+        var json = JsonUtility.ToJson(characterPort.firstConnectedPort.GetNode());
+        var data = JObject.Parse(json);
+
+        string characterId = data["m_Title"].ToString();
+        foreach (var c in _colors)
+        {
+            if (c.CharacterId.Equals(characterId))
+            {
+                _dialogSprite.sprite = c.Sprite;
+                _textField.color = c.Color;
+            }
+        }
+
+        _typingSentence = true;
+        _typingTween = DOTween.Sequence();
+
+        _textField.text = "" + _completeMessage[0];
+        for (int i = 1; i < _completeMessage.Length; i++)
+        {
+            var ch = _completeMessage[i];
+            _typingTween.AppendInterval(_typingDelay);
+            _typingTween.AppendCallback(() =>
+            {
+                _textField.text += ch;
+            });
+        }
+        _typingTween.AppendCallback(() =>
+        {
+            _typingSentence = false;
+            SetWaitingAnimation();
+        });
+    }
+
+    private void SetOptionDialogFromNode(DialogOptionUI option)
+    {
+        var node = _currentNode as Node;
+        option.Text.text = "";
+        string completeMessage = "";
+        node.GetNodeOptionByName($"Option{option.Id + 1}").TryGetValue<string>(out completeMessage);
+        if (string.IsNullOrEmpty(completeMessage))
+        {
+            option.Button.gameObject.SetActive(false);
+            return;
+        }
+        option.Button.gameObject.SetActive(true);
+        completeMessage = $"{option.Id + 1}. {completeMessage}";
+        var typingTween = DOTween.Sequence();
+        foreach (var ch in completeMessage)
+        {
+            typingTween.AppendInterval(_typingDelayForOptions);
+            typingTween.AppendCallback(() =>
+            {
+                option.Text.text += ch;
+            });
+        }
+        typingTween.AppendCallback(() =>
+        {
+            option.Button.onClick.AddListener(() =>
+            {
+                OnSellectOption(option.Id);
+            });
+        });
+    }
+
+    private void OnSellectOption(int id)
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        foreach (var option in _options)
+        {
+            option.Button.onClick = null;
+            option.Button.gameObject.SetActive(false);
+        }
+        _waitingForAnswer = false;
+        AdvanceDialog(id);
     }
 
     public void StartDialog(DialogInstance dialog)
@@ -196,4 +253,12 @@ public class DialogCharacter
     public string CharacterId;
     public Color Color;
     public Sprite Sprite;
+}
+
+[Serializable]
+public class DialogOptionUI
+{
+    public int Id;
+    public Button Button;
+    public TMP_Text Text;
 }

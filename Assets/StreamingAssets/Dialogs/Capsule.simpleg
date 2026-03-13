@@ -53,9 +53,9 @@ MonoBehaviour:
         m_LastKnownBounds:
           serializedVersion: 2
           x: -93
-          y: -302
+          y: -212
           width: 990
-          height: 312
+          height: 145
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 13831966339980353308
@@ -183,7 +183,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: 1c5fb0ef1904f5bfa531ea126e39409b
         m_Version: 2
-        m_Position: {x: 230.27698, y: -249.2092}
+        m_Position: {x: 230.27698, y: -212.04253}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -259,7 +259,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: 2071c8748ed78be6b50312376e9fb158
         m_Version: 2
-        m_Position: {x: -92.912186, y: -301.97333}
+        m_Position: {x: -92.912186, y: -182.80666}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -328,7 +328,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: 8259fac086feb7d14b34bf335e8ff94c
         m_Version: 2
-        m_Position: {x: 580.5378, y: -258.8251}
+        m_Position: {x: 580.5378, y: -211.65843}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -411,7 +411,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: b9a8836db6e581335b3d3008c44398d5
         m_Version: 2
-        m_Position: {x: 433.2878, y: -24.248306}
+        m_Position: {x: 433.2878, y: -156.58163}
         m_Title: Mind
         m_Tooltip: 
         m_NodePreviewModel:
@@ -480,7 +480,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: d27c40ba5b719964cfd1c77fcc4bc1f6
         m_Version: 2
-        m_Position: {x: 783.5378, y: -194.29831}
+        m_Position: {x: 783.5378, y: -183.13164}
         m_Title: 
         m_Tooltip: 
         m_NodePreviewModel:
@@ -549,7 +549,7 @@ MonoBehaviour:
           serializedVersion: 2
           Hash: b8f642267e011a4b634b92c487d1ba8f
         m_Version: 2
-        m_Position: {x: 85, y: -74}
+        m_Position: {x: 85, y: -156.33333}
         m_Title: Mind
         m_Tooltip: 
         m_NodePreviewModel:

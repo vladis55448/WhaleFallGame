@@ -1,12 +1,4 @@
 ﻿<Solution>
-  <Project Path="Unity.CommandStateObserver.csproj" />
-  <Project Path="Unity.GraphToolkit.UnityRestricted.csproj" />
-  <Project Path="Unity.GraphToolkit.Internal.Editor.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
-  <Project Path="Unity.GraphToolsAuthoringFramework.InternalEditorBridge.csproj" />
-  <Project Path="Unity.GraphToolkit.Utility.Editor.csproj" />
-  <Project Path="Unity.GraphToolsAuthoringFramework.InternalBridge.csproj" />
-  <Project Path="Unity.GraphToolkit.Editor.csproj" />
   <Project Path="Assembly-CSharp-firstpass.csproj" />
-  <Project Path="Unity.GraphToolkit.Common.Editor.csproj" />
 </Solution>
