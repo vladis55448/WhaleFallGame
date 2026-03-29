@@ -4,6 +4,8 @@ public class LookAtTransform : MonoBehaviour
 {
     [SerializeField]
     private Transform _startTarget;
+    [SerializeField]
+    private bool _lockToY = false;
 
     private Transform _currentTarget = null;
 
@@ -19,6 +21,14 @@ public class LookAtTransform : MonoBehaviour
     {
         if (_currentTarget == null)
             return;
-        transform.LookAt(_currentTarget);
+        var dir = (_currentTarget.position - transform.position).normalized;
+        var lookTrans = Quaternion.LookRotation(dir);
+        var euler = lookTrans.eulerAngles;
+        if (_lockToY)
+        {
+            euler.x = 0;
+            euler.z = 0;
+        }
+        transform.eulerAngles = euler;
     }
 }

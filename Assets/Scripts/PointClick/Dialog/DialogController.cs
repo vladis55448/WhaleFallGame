@@ -11,15 +11,17 @@ using UnityEngine.UI;
 public class DialogController : MonoBehaviour
 {
     [SerializeField]
-    private FirstPersonController _firstPersonController;
-    [SerializeField]
     private PointClickController _pointClickController;
+    [SerializeField]
+    private FirstPersonController _firstPersonController;
     [SerializeField]
     private TMP_Text _textField;
     [SerializeField]
     private GameObject _dialogTextBox;
     [SerializeField]
     private Image _dialogSprite;
+    [SerializeField]
+    private Image _waitingImage;
     [SerializeField]
     private float _typingDelay;
     [SerializeField]
@@ -37,8 +39,6 @@ public class DialogController : MonoBehaviour
     private DialogInstance _currentDialogInstance;
     private Sequence _typingTween;
     private Sequence _waitingTween;
-
-    private CursorLockMode _prevCursorState;
 
     private const string DIALOG_PATH = "/Dialogs/";
     private const string DATA_TYPE = ".simpleg";
@@ -64,7 +64,7 @@ public class DialogController : MonoBehaviour
     {
         if (_active && !_waitingForAnswer)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
             {
                 if (!_typingSentence)
                 {
@@ -74,18 +74,48 @@ public class DialogController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (!_waitingForAnswer)
+            return;
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Debug.Log("oke");
+            if (_options[0].Button.gameObject.activeSelf)
+            {
+                OnSellectOption(0);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (_options[1].Button.gameObject.activeSelf)
+            {
+                OnSellectOption(1);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (_options[2].Button.gameObject.activeSelf)
+            {
+                OnSellectOption(2);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if (_options[3].Button.gameObject.activeSelf)
+            {
+                OnSellectOption(3);
+            }
+        }
+    }
+
     private void SetWaitingAnimation()
     {
         _waitingTween = DOTween.Sequence();
-        _waitingTween.AppendCallback(() =>
+        _waitingTween.Append(DOVirtual.Color(Color.white, new Color(1, 1, 1, 0.5f), 0.2f, (col) =>
         {
-            _textField.text += " \\";
-        });
-        _waitingTween.AppendInterval(0.5f);
-        _waitingTween.AppendCallback(() =>
-        {
-            _textField.text = _textField.text.Remove(_textField.text.Length - 2);
-        });
+            _waitingImage.color = col;
+        }));
         _waitingTween.AppendInterval(0.5f);
         _waitingTween.SetLoops(-1);
     }
@@ -93,13 +123,31 @@ public class DialogController : MonoBehaviour
     private void AdvanceDialog(int portId = 0)
     {
         if (_waitingTween != null)
+        {
+            _waitingImage.color = new Color(0, 0, 0, 0);
             _waitingTween.Kill();
+        }
         _currentNode = _currentNode.GetOutputPort(portId).firstConnectedPort.GetNode();
         switch (_currentNode)
         {
             case EndNode:
                 {
-                    Cursor.lockState = _prevCursorState;
+                    var node = _currentNode as EndNode;
+                    EndState endState = EndState.FirstPersonMove;
+                    node.GetNodeOptionByName("EndState").TryGetValue<EndState>(out endState);
+                    switch (endState)
+                    {
+                        case EndState.FirstPersonMove:
+                            {
+                                _firstPersonController.Unlock();
+                                break;
+                            }
+                        case EndState.PointAndClick:
+                            {
+                                Cursor.lockState = CursorLockMode.None;
+                                break;
+                            }
+                    }
                     _active = false;
                     _pointClickController.Locked = false;
                     _textField.text = "";
@@ -111,6 +159,10 @@ public class DialogController : MonoBehaviour
             case DialogNode:
                 {
                     SetMainTextFromNode();
+                    _typingTween.AppendCallback(() =>
+                        {
+                            SetWaitingAnimation();
+                        });
                     break;
                 }
             case OptionsNode:
@@ -175,7 +227,6 @@ public class DialogController : MonoBehaviour
         _typingTween.AppendCallback(() =>
         {
             _typingSentence = false;
-            SetWaitingAnimation();
         });
     }
 
@@ -215,7 +266,7 @@ public class DialogController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         foreach (var option in _options)
         {
-            option.Button.onClick = null;
+            option.Button.onClick = new Button.ButtonClickedEvent();
             option.Button.gameObject.SetActive(false);
         }
         _waitingForAnswer = false;
@@ -226,8 +277,6 @@ public class DialogController : MonoBehaviour
     {
         if (_active)
             return;
-        _prevCursorState = Cursor.lockState;
-        Cursor.lockState = CursorLockMode.Locked;
         var path = "Assets/StreamingAssets" + DIALOG_PATH + dialog.Id + DATA_TYPE;
         _currentGraph = GraphDatabase.LoadGraph<DialogGraph>(path);
         var nodes = _currentGraph.GetNodes();
@@ -235,6 +284,8 @@ public class DialogController : MonoBehaviour
         {
             if (n is StartNode)
             {
+                _firstPersonController.Fixate();
+                Cursor.lockState = CursorLockMode.Locked;
                 _currentDialogInstance = dialog;
                 _currentNode = n;
                 _pointClickController.Locked = true;

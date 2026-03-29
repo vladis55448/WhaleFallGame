@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 
 public class FirstPersonController : MonoBehaviour
 {
-    [SerializeField]
-    private float _walkSpeed = 5f;
+
     [SerializeField]
     private float _sensitivityX = 2f;
     [SerializeField]
@@ -15,13 +15,16 @@ public class FirstPersonController : MonoBehaviour
     private float _lookXLimit = 45f;
     [SerializeField]
     private GameObject _interactHint;
+
     [SerializeField]
     private CinemachineImpulseSource _impulseSource;
+
     [SerializeField]
+    private WalkZoneParams _defaultWalkParams;
+
+    private float _walkSpeed = 5f;
     private float _stepDelay;
-    [SerializeField]
     private float _stepFrequency;
-    [SerializeField]
     private float _stepHeight;
 
 
@@ -30,11 +33,11 @@ public class FirstPersonController : MonoBehaviour
     private float _rotationX = 0;
     private CharacterController _characterController;
     private bool _isFixed = false;
+    private List<WalkZone> _zones = new List<WalkZone>();
 
     public void Fixate()
     {
         _isFixed = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 
     public void Unlock()
@@ -46,6 +49,7 @@ public class FirstPersonController : MonoBehaviour
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
+        SetWalkParams(_defaultWalkParams);
     }
 
     private void Update()
@@ -106,5 +110,42 @@ public class FirstPersonController : MonoBehaviour
         {
             _interactHint.SetActive(false);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        var walkZone = collision.gameObject.GetComponent<WalkZone>();
+        if (walkZone != null)
+        {
+            if (_zones.Contains(walkZone))
+                return;
+            _zones.Add(walkZone);
+            SetWalkParams(walkZone.Params);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        var walkZone = collision.gameObject.GetComponent<WalkZone>();
+        if (walkZone != null)
+        {
+            _zones.Remove(walkZone);
+            if (_zones.Count == 0)
+            {
+                SetWalkParams(_defaultWalkParams);
+            }
+            else
+            {
+                SetWalkParams(_zones[_zones.Count - 1].Params);
+            }
+        }
+    }
+
+    private void SetWalkParams(WalkZoneParams walkParams)
+    {
+        _walkSpeed = walkParams.Speed;
+        _stepDelay = walkParams.StepDelay;
+        _stepFrequency = walkParams.StepFrequency;
+        _stepHeight = walkParams.StepHeight;
     }
 }

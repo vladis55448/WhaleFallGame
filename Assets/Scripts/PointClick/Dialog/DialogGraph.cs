@@ -29,12 +29,22 @@ class StartNode : Node
 [Serializable]
 class EndNode : Node
 {
+    protected override void OnDefineOptions(IOptionDefinitionContext context)
+    {
+        context.AddOption("EndState", typeof(EndState)).Build();
+    }
+
     protected override void OnDefinePorts(IPortDefinitionContext context)
     {
         context.AddInputPort("").Build();
     }
 }
 
+public enum EndState
+{
+    FirstPersonMove,
+    PointAndClick
+}
 
 [Serializable]
 class DialogNode : Node
