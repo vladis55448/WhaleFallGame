@@ -99,3 +99,19 @@ class EventNode : Node
         context.AddOutputPort("").Build();
     }
 }
+
+[Serializable]
+class InventoryCheckNode : Node
+{
+    protected override void OnDefineOptions(IOptionDefinitionContext context)
+    {
+        context.AddOption("ItemId", typeof(string)).Build();
+    }
+
+    protected override void OnDefinePorts(IPortDefinitionContext context)
+    {
+        context.AddInputPort("").Build();
+        context.AddOutputPort("HasItem").Build();
+        context.AddOutputPort("NoItem").Build();
+    }
+}

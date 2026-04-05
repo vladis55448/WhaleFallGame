@@ -30,6 +30,10 @@ public class DialogController : MonoBehaviour
     private List<DialogOptionUI> _options = new List<DialogOptionUI>();
     [SerializeField]
     private float _typingDelayForOptions;
+    [SerializeField]
+    private DialogInstance _mockDialogInstance;
+    [SerializeField]
+    private InventoryController _inventoryController;
 
     private bool _active;
     private bool _typingSentence;
@@ -56,9 +60,7 @@ public class DialogController : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-    }
+    public event Action DialogCompleted;
 
     private void LateUpdate()
     {
@@ -80,7 +82,6 @@ public class DialogController : MonoBehaviour
             return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log("oke");
             if (_options[0].Button.gameObject.activeSelf)
             {
                 OnSellectOption(0);
@@ -154,6 +155,7 @@ public class DialogController : MonoBehaviour
                     _dialogSprite.sprite = null;
                     _currentDialogInstance.Complete();
                     _dialogTextBox.SetActive(false);
+                    DialogCompleted?.Invoke();
                     break;
                 }
             case DialogNode:
@@ -186,6 +188,22 @@ public class DialogController : MonoBehaviour
                     node.GetNodeOptionByName("EventId").TryGetValue<string>(out eventId);
                     _currentDialogInstance.ActivateEvent(eventId);
                     AdvanceDialog();
+                    break;
+                }
+            case InventoryCheckNode:
+                {
+                    var node = _currentNode as InventoryCheckNode;
+                    string itemId = "";
+                    node.GetNodeOptionByName("ItemId").TryGetValue<string>(out itemId);
+                    var hasItem = _inventoryController.HasItem(itemId);
+                    if (hasItem)
+                    {
+                        AdvanceDialog(0);
+                    }
+                    else
+                    {
+                        AdvanceDialog(1);
+                    }
                     break;
                 }
         }
@@ -273,12 +291,8 @@ public class DialogController : MonoBehaviour
         AdvanceDialog(id);
     }
 
-    public void StartDialog(DialogInstance dialog)
+    private void SetDialogInstance(DialogInstance instance)
     {
-        if (_active)
-            return;
-        var path = "Assets/StreamingAssets" + DIALOG_PATH + dialog.Id + DATA_TYPE;
-        _currentGraph = GraphDatabase.LoadGraph<DialogGraph>(path);
         var nodes = _currentGraph.GetNodes();
         foreach (var n in nodes)
         {
@@ -286,7 +300,7 @@ public class DialogController : MonoBehaviour
             {
                 _firstPersonController.Fixate();
                 Cursor.lockState = CursorLockMode.Locked;
-                _currentDialogInstance = dialog;
+                _currentDialogInstance = instance;
                 _currentNode = n;
                 _pointClickController.Locked = true;
                 _dialogTextBox.SetActive(true);
@@ -295,6 +309,24 @@ public class DialogController : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void StartMockDialog(string id)
+    {
+        if (_active)
+            return;
+        var path = "Assets/StreamingAssets" + DIALOG_PATH + id + DATA_TYPE;
+        _currentGraph = GraphDatabase.LoadGraph<DialogGraph>(path);
+        SetDialogInstance(_mockDialogInstance);
+    }
+
+    public void StartDialog(DialogInstance dialog)
+    {
+        if (_active)
+            return;
+        var path = "Assets/StreamingAssets" + DIALOG_PATH + dialog.Id + DATA_TYPE;
+        _currentGraph = GraphDatabase.LoadGraph<DialogGraph>(path);
+        SetDialogInstance(dialog);
     }
 }
 

@@ -1,16 +1,19 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
-public class InventoryItem : MonoBehaviour
+[CreateAssetMenu(fileName = "NewInventoryItem", menuName = "Inventory/Item")]
+public class InventoryItem : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private string _id;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private Sprite _sprite;
+
+    [SerializeField]
+    private string _dialogId;
+
+    public string Id => _id;
+    public Sprite Sprite => _sprite;
+    public string DialogId => _dialogId;
 }

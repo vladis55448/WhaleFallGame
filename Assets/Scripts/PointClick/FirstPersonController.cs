@@ -15,12 +15,14 @@ public class FirstPersonController : MonoBehaviour
     private float _lookXLimit = 45f;
     [SerializeField]
     private GameObject _interactHint;
-
     [SerializeField]
     private CinemachineImpulseSource _impulseSource;
-
     [SerializeField]
     private WalkZoneParams _defaultWalkParams;
+
+    [SerializeField]
+    private InventoryController _inventoryController;
+
 
     private float _walkSpeed = 5f;
     private float _stepDelay;
@@ -56,6 +58,12 @@ public class FirstPersonController : MonoBehaviour
     {
         if (_isFixed)
             return;
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            _isFixed = true;
+            _inventoryController.Activate();
+            _inventoryController.Closed += OnInventoryClosed;
+        }
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
         float currentSpeedX = _walkSpeed * Input.GetAxis("Vertical");
@@ -84,6 +92,12 @@ public class FirstPersonController : MonoBehaviour
         _cameraRoot.transform.localRotation = Quaternion.Euler(_rotationX, 0, 0);
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * _sensitivityX, 0);
         CheckInteraction();
+    }
+
+    private void OnInventoryClosed()
+    {
+        _inventoryController.Closed -= OnInventoryClosed;
+        Unlock();
     }
 
     private void CheckInteraction()
